@@ -1,17 +1,12 @@
 class CommentsController < ApplicationController
   before_action :get_book
-  before_action :get_comment, except: [:new, :index, :create]
+  before_action :get_comment, only: [:edit, :update, :destroy]
 
   def new
     @comment = Comment.new
   end
 
-  def show
-
-  end
-
   def edit
-
   end
 
   def update
@@ -43,7 +38,7 @@ class CommentsController < ApplicationController
   end
 
   def get_comment
-    @comment = Comment.find(params[:id])
+    @comment = @book.comments.find(params[:id])
   end
 
   def comment_params

@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   end
 
   namespace :editor do
-    resources :books
-    resources :comments, only: [:edit, :update, :delete]
+    resources :books do
+      resources :comments, only: [:edit, :update, :destroy]
+    end
   end
 
   resources :books, only: [:index, :show] do

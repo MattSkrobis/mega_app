@@ -1,12 +1,12 @@
 class Editor::CommentsController < ApplicationController
-  before_action :get_comment, only: [:edit, :update, :delete]
+  before_action :get_book
+  before_action :get_comment, only: [:edit, :update, :destroy]
 
   def edit
 
   end
 
   def update
-
     if @comment.update_attributes(comment_params)
       redirect_to editor_book_path(@book)
     else
@@ -14,15 +14,19 @@ class Editor::CommentsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @comment.destroy
     redirect_to editor_book_path(@book)
   end
 
   private
 
+  def get_book
+    @book = Book.find(params[:book_id])
+  end
+
   def get_comment
-    @comment = Comment.find(params[:id])
+    @comment = @book.comments.find(params[:id])
   end
 
   def comment_params

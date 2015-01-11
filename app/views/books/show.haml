@@ -38,7 +38,7 @@
     %th Rating
     %th User
     %th Actions
-  - @book.comments.each do |comment|
+  - @book.comments.where('id IS NOT NULL').each do |comment|
     %tr
       %td= comment.description
       %td= comment.rating

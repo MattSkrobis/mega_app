@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe CommentsController do
   render_views
+  let(:user) { create(:user) }
   let!(:book) { create(:book) }
 
   # NO INDEX
@@ -14,18 +15,6 @@ describe CommentsController do
 
       it { should render_template 'new' }
       it { expect(assigns(:comment).persisted?).to be false }
-    end
-  end
-
-  describe '#show' do
-    let(:call_request) { get :show, id: comment.id, book_id: book.id }
-    let(:comment) { create(:comment, book: book) }
-
-    context 'after request' do
-      before { call_request }
-
-      it { should render_template 'show' }
-      it { expect(assigns(:comment)).to eq comment }
     end
   end
 
@@ -58,7 +47,7 @@ describe CommentsController do
     let(:call_request) { post :create, comment: attributes, book_id: book.id }
 
     context 'valid request' do
-      let(:attributes) { attributes_for(:comment, book: book) }
+      let(:attributes) { attributes_for(:comment, user_id: user.id) }
 
       it { expect { call_request }.to change { Comment.count }.by(1) }
 
