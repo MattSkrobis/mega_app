@@ -1,0 +1,18 @@
+%h1 Comment
+
+%b Description
+=@comment.description
+%br
+
+%b Rating
+=@comment.rating
+%br
+
+%b Author
+=link_to @comment.user.to_s, admin_user_path(@comment.user) if @comment.user
+%br
+
+%b Book
+=link_to @comment.book.to_s, admin_book_path(@comment.book) if @comment.book
+%br
+

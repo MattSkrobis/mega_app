@@ -1,0 +1,49 @@
+%h1 Book EDITOR
+
+%b Title
+=@book.title
+%br
+
+%b Author
+=@book.author
+%br
+
+%b Description
+=@book.description
+%br
+
+%b Publisher
+=@book.publisher
+%br
+
+%b Genre
+=@book.genre
+%br
+
+%b Edition
+=@book.edition
+%br
+%br
+
+=semantic_form_for([:editor, @comment]) do |f|
+  =f.input :description
+  =f.input :rating
+  =f.input :user_id, as: :select, collection: User.all
+  =f.submit
+
+%h3 Comments about #{@book.title}
+%table
+  %tr
+    %th Description
+    %th Rating
+    %th By User
+    %th Action
+  - @book.comments.each do |comment|
+    %tr
+      %td= comment.description
+      %td= comment.rating
+      %td= comment.user
+      %td
+        = link_to 'Edit', edit_editor_comment_path(comment)
+        = link_to 'Delete', editor_comment_path(comment), method: :delete, data: {confirm: "Are you certain, Editor?"}
+

@@ -1,0 +1,15 @@
+%h1 Avatars
+
+%table
+  %tr
+    %th Name
+    %th Belongs to
+    %th Actions
+  - @avatars.each do |avatar|
+    %tr
+      %td= avatar.name
+      %td= avatar.user.to_s if avatar.user
+      %td
+        = link_to 'Edit', edit_admin_avatar_path(avatar)
+        = link_to 'Show',admin_avatar_path(avatar)
+        = link_to 'Destroy', admin_avatar_path(avatar), method: :delete, data: {confirm: 'Are you absolutely positive about this?'}

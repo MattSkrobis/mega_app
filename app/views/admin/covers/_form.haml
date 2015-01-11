@@ -1,0 +1,4 @@
+=semantic_form_for([:admin, @cover]) do |f|
+  =f.input :name
+  =f.input :book_id, as: :select, collection: Book.all
+  =f.submit

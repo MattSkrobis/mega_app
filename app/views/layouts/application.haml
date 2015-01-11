@@ -1,0 +1,43 @@
+%html
+  %head
+    %title First
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %h1 Master menu
+    %p The menu of all menus
+
+    %div Admin
+
+    = link_to "Users", admin_users_path
+    = link_to "User Creator", new_admin_user_path
+    %br
+    = link_to "Books", admin_books_path
+    = link_to "Book Creator", new_admin_book_path
+    %br
+    = link_to "Comments", admin_comments_path
+    = link_to "Comment Creator", new_admin_comment_path
+
+    -#%br TO DO
+
+    -#= link_to "Avatars", admin_avatars_path
+    -#= link_to "Avatar Creator", new_admin_avatar_path
+    -#%br
+    -#= link_to "Covers", admin_covers_path
+    -#= link_to "Cover Creator", new_admin_cover_path
+    %br
+    %br
+    %div Editor
+
+    = link_to 'Books', editor_books_path
+    = link_to 'Book Creator', new_editor_book_path
+
+
+    %br
+    %br
+    %div User
+
+    = link_to 'Books', books_path
+
+    = yield

@@ -1,0 +1,8 @@
+=semantic_form_for(@book) do |f|
+  =f.input :title
+  =f.input :author
+  =f.input :description
+  =f.input :publisher
+  =f.input :edition, as: :select, collection: Book.editions_for_select
+  =f.input :genre
+  =f.submit

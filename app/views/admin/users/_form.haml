@@ -1,0 +1,11 @@
+=semantic_form_for([:admin, @user], :url => admin_users_path, :html => { :multipart => true }) do |f|
+  = f.input :nickname
+  = f.file_field :avatar
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :age
+  = f.input :country, as: :string
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :email
+  = f.submit

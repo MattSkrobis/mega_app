@@ -1,0 +1,7 @@
+%h1 Avatar
+
+=@avatar.name
+%br
+%br
+%b Belongs_to
+= link_to @avatar.user.to_s, admin_user_path(@avatar.user) if @avatar.user
