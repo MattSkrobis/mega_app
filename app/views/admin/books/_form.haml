@@ -1,8 +1,11 @@
-=semantic_form_for([:admin, @book]) do |f|
+=semantic_form_for([:admin, @book], html: {multipart: true}) do |f|
+  =f.input :avatar
   =f.input :title
   =f.input :author
   =f.input :description
   =f.input :publisher
   =f.input :edition, as: :select, collection: Book.editions_for_select
   =f.input :genre
-  =f.submit
+  =f.actions do
+    =f.action :submit
+    =f.action :cancel

@@ -3,7 +3,6 @@ class Editor::CommentsController < ApplicationController
   before_action :get_comment, only: [:edit, :update, :destroy]
 
   def edit
-
   end
 
   def update

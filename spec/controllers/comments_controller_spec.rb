@@ -20,7 +20,7 @@ describe CommentsController do
 
   describe '#edit' do
     let(:call_request) { get :edit, book_id: book.id, id: comment.id }
-    let(:comment) { create(:comment, book: book) }
+    let(:comment) { create(:comment, book: book, user: user) }
 
     context 'after request' do
       before { call_request }

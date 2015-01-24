@@ -1,5 +1,6 @@
-=semantic_form_for([:editor, @book]) do |f|
+=semantic_form_for([:editor, @book], html: {multipart: true}) do |f|
   =f.input :title
+  =f.input :avatar
   =f.input :author
   =f.input :description
   =f.input :publisher

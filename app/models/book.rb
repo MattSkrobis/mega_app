@@ -2,12 +2,15 @@ class Book < ActiveRecord::Base
   has_one :cover
   has_many :comments
 
+  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   EDITIONS = %w(Softcover Hardcover E-Book)
 
   validates :title, :author, :publisher, :edition, :genre, :description, presence: true
 
   def self.editions_for_select
-    EDITIONS.map {|edition| [edition, edition]}
+    EDITIONS.map { |edition| [edition, edition] }
   end
 
   def to_s

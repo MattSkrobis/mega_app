@@ -2,12 +2,20 @@ require 'rails_helper'
 
 describe Editor::CommentsController do
   render_views
-  let!(:user) { create(:user) }
   let!(:book) { create(:book) }
+  let!(:user) { create(:user) }
 
 
   describe '#edit' do
-    pending
+    let(:comment) { create(:comment, user: user, book: book) }
+    let(:call_request) { get :edit, book_id: book.id, id: comment.id, user_id: user.id }
+
+    context 'after request' do
+      before { call_request }
+
+      it { should render_template 'edit' }
+      it { expect(assigns(:comment)).to eq comment }
+    end
   end
 
   describe '#delete' do

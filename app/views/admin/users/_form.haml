@@ -1,4 +1,4 @@
-=semantic_form_for([:admin, @user], :url => admin_users_path, :html => { :multipart => true }) do |f|
+=semantic_form_for([:admin, @user], html: {multipart: true}) do |f|
   = f.input :nickname
   = f.file_field :avatar
   = f.input :first_name

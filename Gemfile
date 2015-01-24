@@ -32,6 +32,8 @@ gem 'pry'
 gem 'devise'
 
 gem "paperclip", "~> 4.2"
+gem "twitter-bootstrap-rails"
+gem "formtastic-bootstrap", "~> 3.1.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,6 +46,9 @@ gem "paperclip", "~> 4.2"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+group :development do
+  gem 'letter_opener'
+end
 
 group :test do
   gem 'database_cleaner'
