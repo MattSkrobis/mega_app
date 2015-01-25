@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe User do
-  it { should validate_presence_of(:nickname) }
-  it { should validate_presence_of(:last_name) }
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:country) }
+  it { should validate_presence_of(:nickname).on(:update) }
+  it { should validate_presence_of(:last_name).on(:update) }
+  it { should validate_presence_of(:first_name).on(:update) }
+  it { should validate_presence_of(:country).on(:update) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:encrypted_password) }
-  it { should validate_presence_of(:age) }
-  it { should validate_numericality_of(:age) }
+  it { should validate_presence_of(:age).on(:update) }
+  # it { should validate_numericality_of(:age) }
   it { should have_many(:comments) }
   it { should have_one(:avatar) }
 

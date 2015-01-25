@@ -28,7 +28,7 @@
 %br
 
 %h3 Comments about #{@book.title}
-%table
+%table.table.table-hover
   %tr
     %th Description
     %th Rating
@@ -40,5 +40,5 @@
       %td= comment.rating
       %td= comment.user
       %td
-        = link_to 'Edit', edit_editor_book_comment_path(@book, comment)
-        = link_to 'Delete', editor_book_comment_path(@book, comment), method: :delete, data: {confirm: "Are you certain, Editor?"}
+        = link_to 'Edit', edit_editor_book_comment_path(@book, comment), class: 'btn'
+        = link_to 'Delete', editor_book_comment_path(@book, comment), method: :delete, data: {confirm: "Are you certain, Editor?"}, class: 'btn btn-danger'

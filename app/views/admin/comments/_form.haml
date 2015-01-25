@@ -3,4 +3,7 @@
   =f.input :rating
   =f.input :user_id, as: :select, collection: User.all
   =f.input :book_id, as: :select, collection: Book.all
-  =f.submit
+  =f.actions do
+    =f.action :submit
+    =f.action :cancel
+

@@ -26,25 +26,31 @@
 =@book.edition
 %br
 
+%h2 Leave a comment
 
 =semantic_form_for([@book, @comment]) do |f|
   =f.input :description
   =f.input :rating
   =f.input :user_id, as: :select, collection: User.all
-  =f.submit
+  =f.actions do
+    =f.action :submit
+    =f.action :cancel
+
 
 %h2 Comments about #{@book.title}
-%table
-  %tr
-    %th Description
-    %th Rating
-    %th User
-    %th Actions
-  - @book.comments.where('id IS NOT NULL').each do |comment|
+%table.table.table-hover
+  %thead
     %tr
-      %td= comment.description
-      %td= comment.rating
-      %td= comment.user
-      %td
-        = link_to "Edit", edit_book_comment_path(@book, comment)
-        = link_to 'Destroy', book_comment_path(@book, comment), method: :delete, data: {confirm: 'are you sure?'}
+      %th Description
+      %th Rating
+      %th User
+      %th Actions
+  %tbody
+    - @book.comments.where('id IS NOT NULL').each do |comment|
+      %tr
+        %td= comment.description
+        %td= comment.rating
+        %td= comment.user
+        %td
+          = link_to "Edit", edit_book_comment_path(@book, comment), class: 'btn'
+          = link_to 'Destroy', book_comment_path(@book, comment), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'

@@ -2,9 +2,11 @@ require 'rails_helper'
 
 describe Admin::BooksController do
   render_views
+  let(:author) { create(:author) }
+  let(:publisher) { create(:publisher) }
 
   describe '#index' do
-    let(:call_request) { get :index }
+    let(:call_request) { get :index, author: author, publisher: publisher }
     let!(:book) { create(:book) }
 
     context 'after request' do
@@ -15,7 +17,7 @@ describe Admin::BooksController do
   end
 
   describe '#new' do
-    let(:call_request) { get :new }
+    let(:call_request) { get :new, author_id: author.id, publisher_id: publisher.id }
 
     context 'after request' do
       before { call_request }
@@ -26,8 +28,8 @@ describe Admin::BooksController do
   end
 
   describe '#edit' do
-    let(:call_request) { get :edit, id: book.id }
-    let(:book) { create(:book) }
+    let(:call_request) { get :edit, id: book.id, author_id: author.id, publisher_id: publisher.id }
+    let(:book) { create(:book, author: author, publisher: publisher) }
 
     context 'after request' do
       before { call_request }
@@ -38,7 +40,7 @@ describe Admin::BooksController do
   end
 
   describe '#show' do
-    let(:call_request) { get :show, id: book.id }
+    let(:call_request) { get :show, id: book.id, author_id: author.id, publisher_id: publisher.id }
     let(:book) { create (:book) }
 
     context 'after request' do
@@ -50,8 +52,8 @@ describe Admin::BooksController do
   end
 
   describe '#destroy' do
-    let(:call_request) { delete :destroy, id: book.id }
-    let!(:book) { create(:book) }
+    let(:call_request) { delete :destroy, id: book.id, author_id: author.id, publisher_id: publisher.id }
+    let!(:book) { create(:book, author: author, publisher: publisher) }
 
     it { expect { call_request }.to change { Book.count }.by(-1) }
     context 'after request' do
@@ -62,10 +64,10 @@ describe Admin::BooksController do
   end
 
   describe '#create' do
-    let(:call_request) { post :create, book: attributes }
+    let(:call_request) { post :create, book: attributes, author: author, publisher: publisher }
 
     context 'valid request' do
-      let(:attributes) { attributes_for(:book, title: '101 Ways to become a human being') }
+      let(:attributes) { attributes_for(:book, title: '101 Ways to become a human being', author_id: author.id, publisher_id: publisher.id) }
 
       it { expect { call_request }.to change { Book.count }.by(1) }
       context 'after request' do
@@ -77,7 +79,7 @@ describe Admin::BooksController do
     end
 
     context 'invalid request' do
-      let(:attributes) { attributes_for(:book, title: nil) }
+      let(:attributes) { attributes_for(:book, title: nil, author_id: author.id, publisher_id: publisher.id) }
 
       it { expect { call_request }.not_to change { Book.count } }
 
@@ -89,8 +91,8 @@ describe Admin::BooksController do
   end
 
   describe '#update' do
-    let(:call_request) { put :update, book: attributes, id: book.id }
-    let!(:book) { create(:book, title: 'Westside Tale') }
+    let(:call_request) { put :update, book: attributes, id: book.id, author_id: author.id, publisher_id: publisher.id }
+    let!(:book) { create(:book, title: 'Westside Tale', author: author, publisher: publisher) }
 
     context 'valid request' do
       let(:attributes) { attributes_for(:book, title: 'Eastside Story') }

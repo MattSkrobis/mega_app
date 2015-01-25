@@ -101,7 +101,7 @@ describe Admin::UsersController do
     let(:call_request) { post :create, user: attributes }
 
     context 'valid request' do
-      let(:attributes) { attributes_for(:user, first_name: 'Alfonso') }
+      let(:attributes) { attributes_for(:user, email: 'alfonso@gmail.com') }
 
       it { expect { call_request }.to change { User.count }.by(1) }
 
@@ -114,7 +114,7 @@ describe Admin::UsersController do
     end
 
     context 'invalid request' do
-      let(:attributes) { attributes_for(:user, first_name: nil) }
+      let(:attributes) { attributes_for(:user, email: nil) }
 
       it {expect { call_request }.not_to change { User.count }}
 

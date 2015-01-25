@@ -1,9 +1,11 @@
 =semantic_form_for(@book, url: books_path, html: { :multipart => true }) do |f|
   =f.input :title
   =f.input :avatar
-  =f.input :author
+  =f.input :author_id, as: :select, collection: Author.all
   =f.input :description
-  =f.input :publisher
+  =f.input :publisher_id, as: :select, collection: Publisher.all
   =f.input :edition, as: :select, collection: Book.editions_for_select
   =f.input :genre
-  =f.submit
+  =f.actions do
+    =f.action :submit
+    =f.action :cancel

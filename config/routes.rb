@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :comments
     resources :avatars
     resources :books
+    resources :authors
+    resources :publishers
   end
 
   namespace :editor do
