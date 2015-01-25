@@ -1,4 +1,4 @@
-class Admin::PublishersController < ApplicationController
+class Admin::PublishersController < Admin::AdminController
   before_action :get_publisher, only: [:show, :edit, :destroy, :update]
 
   def index

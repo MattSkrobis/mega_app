@@ -1,4 +1,4 @@
-class Admin::CommentsController < ApplicationController
+class Admin::CommentsController < Admin::AdminController
   before_action :get_comment, except: [:new, :create, :index]
 
   def new

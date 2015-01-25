@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe Admin::BooksController do
   render_views
+  include_context 'admin signed in'
+  
   let(:author) { create(:author) }
   let(:publisher) { create(:publisher) }
 

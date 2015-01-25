@@ -8,10 +8,18 @@
     - if current_user
       = link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'
     - else
-      = link_to "Sign in", new_user_session_path, class: 'btn btn-inverse'
-      = link_to "Sign up", new_user_registration_path, class: 'btn btn-inverse'
+      = link_to "Sign in", new_user_session_path, class: 'btn btn-large btn-success'
+      = link_to "Sign up", new_user_registration_path, class: 'btn btn-large btn-success'
     %h1 Master menu
     %p The menu of all menus
+
+    - if flash[:notice]
+      %br
+      .success= flash[:notice]
+    - elsif flash[:error]
+      %br
+      .error= flash[:error]
+    %br
 
     %div Admin
 

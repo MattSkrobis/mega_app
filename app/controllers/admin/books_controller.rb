@@ -1,4 +1,4 @@
-class Admin::BooksController < ApplicationController
+class Admin::BooksController < Admin::AdminController
   before_action :get_book, except: [:new, :create, :index]
 
   def new

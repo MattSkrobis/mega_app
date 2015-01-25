@@ -1,4 +1,4 @@
-class Editor::BooksController < ApplicationController
+class Editor::BooksController < Editor::EditorController
   before_action :get_book, except: [:new, :index, :create]
 
   def index

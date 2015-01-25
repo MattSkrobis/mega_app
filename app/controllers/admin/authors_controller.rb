@@ -1,4 +1,4 @@
-class Admin::AuthorsController < ApplicationController
+class Admin::AuthorsController < Admin::AdminController
   before_action :get_author, only: [:edit, :update, :destroy, :show]
 
   def index

@@ -9,4 +9,11 @@ FactoryGirl.define do
     sequence(:password) { 'secret' }
     sequence(:password_confirmation) { 'secret' }
   end
+  factory :editor, parent: :user do
+    role 'editor'
+  end
+
+  factory :admin, parent: :user do
+    role 'admin'
+  end
 end

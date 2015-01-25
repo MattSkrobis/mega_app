@@ -1,4 +1,4 @@
-class Editor::CommentsController < ApplicationController
+class Editor::CommentsController < Editor::EditorController
   before_action :get_book
   before_action :get_comment, only: [:edit, :update, :destroy]
 

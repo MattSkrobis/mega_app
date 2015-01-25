@@ -1,4 +1,4 @@
-class Admin::CoversController < ApplicationController
+class Admin::CoversController < Admin::AdminController
   before_action :get_cover, except: [:new, :create, :index]
 
   def index

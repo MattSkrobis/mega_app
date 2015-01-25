@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Admin::AvatarsController do
   let!(:user) { create(:user) }
   render_views
+  include_context 'admin signed in'
 
   describe '#index' do
     let(:call_request) { get :index, user_id: user.id }

@@ -1,4 +1,4 @@
-class Admin::AvatarsController < ApplicationController
+class Admin::AvatarsController < Admin::AdminController
   before_action :get_avatar, except: [:new, :create, :index]
 
   def index

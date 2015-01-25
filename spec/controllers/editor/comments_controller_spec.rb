@@ -2,9 +2,10 @@ require 'rails_helper'
 
 describe Editor::CommentsController do
   render_views
+  include_context 'editor signed in'
+
   let!(:book) { create(:book) }
   let!(:user) { create(:user) }
-
 
   describe '#edit' do
     let(:comment) { create(:comment, user: user, book: book) }

@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Admin::CoversController do
   let!(:book) { create(:book) }
   render_views
+  include_context 'admin signed in'
 
   describe '#index' do
     let(:call_request) { get :index, book_id: book.id }

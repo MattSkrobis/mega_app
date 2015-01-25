@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe Editor::BooksController do
   render_views
+  include_context 'editor signed in'
+
   let(:author) { create(:author) }
   let(:publisher) { create(:publisher) }
 

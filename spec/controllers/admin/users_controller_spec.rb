@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Admin::UsersController do
   render_views
+  include_context 'admin signed in'
 
   describe '#index' do
     let(:call_request) { get :index }
@@ -10,7 +11,7 @@ describe Admin::UsersController do
     context 'after request' do
       before { call_request }
 
-      it { expect(assigns(:users)).to eq [user] }
+      it { expect(assigns(:users)).to eq [admin, user] }
       it { should render_template 'index' }
     end
   end

@@ -17,4 +17,12 @@ class User < ActiveRecord::Base
   def to_s
     "#{first_name} #{last_name}"
   end
+
+  def admin?
+    role == 'admin'
+  end
+
+  def editor?
+    role == 'editor'
+  end
 end

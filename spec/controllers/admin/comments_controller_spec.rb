@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Admin::CommentsController do
   render_views
+  include_context 'admin signed in'
   let(:book) {create(:book)}
   let(:user) {create(:user)}
 
