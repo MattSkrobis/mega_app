@@ -1,0 +1,23 @@
+%h1 Publisher
+
+%b Name
+= @publisher.name
+%br
+
+%b E-mail
+= @publisher.email
+%br
+
+%b Phone number
+= @publisher.phone
+%br
+
+%b Country
+= @publisher.country
+%br
+
+%h3 Books by this publishers
+%table.table.table-hover
+  %tr
+  - @publisher.books.each do |book|
+    %td= book.to_s

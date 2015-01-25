@@ -1,0 +1,21 @@
+%h1 Publishers
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+      %th Country
+      %th Actions
+  %tbody
+    - @publishers.each do |publisher|
+      %tr
+        %td= publisher.name
+        %td= publisher.email
+        %td= publisher.phone
+        %td= publisher.country
+        %td
+          = link_to "Show", admin_publisher_path(publisher), class: 'btn'
+          = link_to "Edit", edit_admin_publisher_path(publisher), class: 'btn'
+          = link_to "Delete", admin_publisher_path(publisher), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger'

@@ -1,0 +1,19 @@
+%h1 Authors
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Age
+      %th Country
+      %th Actions
+  %tbody
+    - @authors.each do |author|
+      %tr
+        %td= author.to_s
+        %td= author.age
+        %td= author.country
+        %td
+          = link_to 'Show', admin_author_path(author), class: 'btn'
+          = link_to 'Edit', edit_admin_author_path(author), class: 'btn'
+          = link_to 'Destroy', admin_author_path(author), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
