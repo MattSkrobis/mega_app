@@ -20,30 +20,18 @@
       %br
       .error= flash[:error]
     %br
-
     %div Admin
 
     = link_to "Users", admin_users_path, class: 'btn btn-primary'
-    = link_to "User Creator", new_admin_user_path, class: 'btn btn-primary'
-    %br
     = link_to "Books", admin_books_path, class: 'btn btn-primary'
-    = link_to "Book Creator", new_admin_book_path, class: 'btn btn-primary'
-    %br
     = link_to "Comments", admin_comments_path, class: 'btn btn-primary'
-    = link_to "Comment Creator", new_admin_comment_path, class: 'btn btn-primary'
-    %br
     = link_to "Authors", admin_authors_path, class: 'btn btn-primary'
-    = link_to "Author Creator", new_admin_author_path, class: 'btn btn-primary'
-    %br
     = link_to "Publishers", admin_publishers_path, class: 'btn btn-primary'
-    = link_to "Publisher Creator", new_admin_publisher_path, class: 'btn btn-primary'
     %br
     %br
     %div Editor
 
     = link_to 'Books', editor_books_path, class: 'btn btn-primary'
-    = link_to 'Book Creator', new_editor_book_path, class: 'btn btn-primary'
-
     %br
     %br
     %div User

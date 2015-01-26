@@ -24,7 +24,6 @@ describe Admin::AuthorsController do
 
       it { expect(assigns(:author).persisted?).to be false }
       it { should render_template 'new' }
-
     end
   end
 
