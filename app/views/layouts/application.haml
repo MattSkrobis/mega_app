@@ -5,9 +5,22 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if current_user
-      = link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'
+    - if user_signed_in?
+      - if current_user.role == "admin"
+        = link_to "Users", admin_users_path, class: 'btn btn-primary'
+        = link_to "Books", admin_books_path, class: 'btn btn-primary'
+        = link_to "Comments", admin_comments_path, class: 'btn btn-primary'
+        = link_to "Authors", admin_authors_path, class: 'btn btn-primary'
+        = link_to "Publishers", admin_publishers_path, class: 'btn btn-primary'
+        = link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'
+      - elsif current_user.role == "editor"
+        = link_to 'Books', editor_books_path, class: 'btn btn-primary'
+        = link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'
+      - else
+        = link_to 'Books', books_path, class: 'btn btn-primary'
+        = link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'
     - else
+      = link_to 'Books', books_path, class: 'btn btn-primary'
       = link_to "Sign in", new_user_session_path, class: 'btn btn-large btn-success'
       = link_to "Sign up", new_user_registration_path, class: 'btn btn-large btn-success'
     %h1 Master menu
@@ -19,23 +32,5 @@
     - elsif flash[:error]
       %br
       .error= flash[:error]
-    %br
-    %div Admin
-
-    = link_to "Users", admin_users_path, class: 'btn btn-primary'
-    = link_to "Books", admin_books_path, class: 'btn btn-primary'
-    = link_to "Comments", admin_comments_path, class: 'btn btn-primary'
-    = link_to "Authors", admin_authors_path, class: 'btn btn-primary'
-    = link_to "Publishers", admin_publishers_path, class: 'btn btn-primary'
-    %br
-    %br
-    %div Editor
-
-    = link_to 'Books', editor_books_path, class: 'btn btn-primary'
-    %br
-    %br
-    %div User
-
-    = link_to 'Books', books_path, class: 'btn btn-primary'
 
     = yield
