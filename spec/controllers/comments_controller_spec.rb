@@ -19,6 +19,8 @@ describe CommentsController do
   end
 
   describe '#edit' do
+    include_context 'user signed in'
+
     let(:call_request) { get :edit, book_id: book.id, id: comment.id }
     let(:comment) { create(:comment, book: book, user: user) }
 
@@ -31,6 +33,8 @@ describe CommentsController do
   end
 
   describe '#delete' do
+    include_context 'user signed in'
+
     let!(:comment) { create(:comment, book: book) }
     let(:call_request) { delete :destroy, id: comment.id, book_id: book.id }
 

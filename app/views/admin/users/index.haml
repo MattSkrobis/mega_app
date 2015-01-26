@@ -6,6 +6,7 @@
   %thead
     %tr
       %th Nickname
+      %th E-mail
       %th First name
       %th Last name
       %th Age
@@ -15,6 +16,7 @@
     - @users.each do |user|
       %tr
         %td= user.nickname
+        %td= user.email
         %td= user.first_name
         %td= user.last_name
         %td= user.age

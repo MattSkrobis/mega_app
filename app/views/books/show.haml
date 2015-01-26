@@ -27,14 +27,16 @@
 %br
 
 %h2 Leave a comment
-
-=semantic_form_for([@book, @comment]) do |f|
-  =f.input :description
-  =f.input :rating
-  =f.input :user_id, as: :select, collection: User.all
-  =f.actions do
-    =f.action :submit
-    =f.action :cancel
+- if user_signed_in?
+  =semantic_form_for([@book, @comment]) do |f|
+    =f.input :description
+    =f.input :rating
+    =f.input :user_id, as: :select, collection: User.all
+    =f.actions do
+      =f.action :submit
+      =f.action :cancel
+- else
+  %p Sign in to add comments
 
 
 %h2 Comments about #{@book.title}
@@ -52,5 +54,8 @@
         %td= comment.rating
         %td= comment.user
         %td
-          = link_to "Edit", edit_book_comment_path(@book, comment), class: 'btn'
-          = link_to 'Destroy', book_comment_path(@book, comment), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+          - if user_signed_in?
+            = link_to "Edit", edit_book_comment_path(@book, comment), class: 'btn'
+            = link_to 'Destroy', book_comment_path(@book, comment), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+          - else
+            %p Sign in to edit and delete comments

@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    if user_signed_in?
+
+    end
   end
 
   def update
@@ -27,8 +30,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    redirect_to book_path(@book)
+    if user_signed_in?
+      @comment.destroy
+      redirect_to book_path(@book)
+    else
+      flash[:notice] = 'You must be logged in to perform this action'
+    end
   end
 
   private
