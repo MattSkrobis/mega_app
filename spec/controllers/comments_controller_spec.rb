@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe CommentsController do
+  include_context 'user signed in'
   render_views
+
   let(:user) { create(:user) }
   let!(:book) { create(:book) }
 
@@ -19,8 +21,6 @@ describe CommentsController do
   end
 
   describe '#edit' do
-    include_context 'user signed in'
-
     let(:call_request) { get :edit, book_id: book.id, id: comment.id }
     let(:comment) { create(:comment, book: book, user: user) }
 
@@ -33,10 +33,8 @@ describe CommentsController do
   end
 
   describe '#delete' do
-    include_context 'user signed in'
-
-    let!(:comment) { create(:comment, book: book) }
-    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id }
+    let!(:comment) { create(:comment, book: book, user: user) }
+    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id, user_id:user.id }
 
     it { expect { call_request }.to change { Comment.count }.by(-1) }
 

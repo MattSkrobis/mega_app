@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
   before_action :get_book
   before_action :get_comment, only: [:edit, :update, :destroy]
+  before_action :user_signed_in?
+  before_action :correct_owner?, only: [:edit, :update, :destroy]
+
 
   def new
     @comment = Comment.new
   end
 
   def edit
-    if user_signed_in?
-
-    end
   end
 
   def update
@@ -30,11 +30,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in?
+    if current_user && current_user == @comment.user
       @comment.destroy
       redirect_to book_path(@book)
-    else
-      flash[:notice] = 'You must be logged in to perform this action'
     end
   end
 
@@ -50,5 +48,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:rating, :description, :user_id)
+  end
+
+  def correct_owner?
+    @comment.user == current_user
   end
 end

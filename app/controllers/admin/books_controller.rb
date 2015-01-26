@@ -6,7 +6,7 @@ class Admin::BooksController < Admin::AdminController
   end
 
   def index
-    @books = Book.all
+    @books = Book.all.order(:title).page(params[:page]).per(5)
   end
 
   def edit
