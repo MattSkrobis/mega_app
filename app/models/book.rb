@@ -1,5 +1,4 @@
 class Book < ActiveRecord::Base
-  has_one :cover
   has_many :comments
   belongs_to :author
   belongs_to :publisher

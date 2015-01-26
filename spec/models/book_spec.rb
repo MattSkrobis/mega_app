@@ -7,7 +7,6 @@ describe Book do
   it { should validate_presence_of(:publisher_id) }
   it { should validate_presence_of(:genre) }
   it { should have_many(:comments) }
-  it { should have_one(:cover) }
   it { should belong_to(:author) }
   it { should belong_to(:publisher) }
 

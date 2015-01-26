@@ -10,7 +10,7 @@ describe User do
   it { should validate_presence_of(:age).on(:update) }
   # it { should validate_numericality_of(:age) }
   it { should have_many(:comments) }
-  it { should have_one(:avatar) }
+
 
   describe '#to_s' do
     let(:user) { create(:user, first_name: 'Claire', last_name: 'Fitzpatrick') }
