@@ -31,6 +31,7 @@ gem 'formtastic'
 gem 'pry'
 gem 'devise'
 gem 'kaminari'
+gem 'ransack'
 
 gem "paperclip", "~> 4.2"
 gem "twitter-bootstrap-rails"
