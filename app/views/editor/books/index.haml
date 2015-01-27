@@ -1,3 +1,8 @@
+= search_form_for [:editor, @q] do |f|
+  = f.label :title_cont
+  = f.search_field :title_cont
+  = f.submit
+
 %h1
   Books
   = link_to 'Add Book', new_editor_book_path, class: 'btn btn-primary'

@@ -2,7 +2,8 @@ class Editor::BooksController < Editor::EditorController
   before_action :get_book, except: [:new, :index, :create]
 
   def index
-    @books = Book.by_title.page(params[:page]).per(5)
+    @q = Book.search(params[:q])
+    @books = @q.result.page(params[:page]).per(5)
   end
 
   def new

@@ -31,7 +31,7 @@ gem 'formtastic'
 gem 'pry'
 gem 'devise'
 gem 'kaminari'
-gem 'ransack'
+gem 'ransack', :github => "activerecord-hackery/ransack", :branch => "rails-4.1"
 
 gem "paperclip", "~> 4.2"
 gem "twitter-bootstrap-rails"

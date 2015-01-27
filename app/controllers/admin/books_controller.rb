@@ -6,7 +6,8 @@ class Admin::BooksController < Admin::AdminController
   end
 
   def index
-    @books = Book.by_title.page(params[:page]).per(5)
+    @q = Book.search(params[:q])
+    @books = @q.result.page(params[:page]).per(5)
   end
 
   def edit
