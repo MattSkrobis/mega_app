@@ -2,7 +2,8 @@ class Admin::AuthorsController < Admin::AdminController
   before_action :get_author, only: [:edit, :update, :destroy, :show]
 
   def index
-    @authors = Author.all
+    @q = Author.search(params[:q])
+    @authors = @q.result.page(params[:page]).per(5)
   end
 
   def new

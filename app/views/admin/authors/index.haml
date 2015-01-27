@@ -1,3 +1,8 @@
+= search_form_for [:admin, @q] do |f|
+  = f.label :first_name_or_last_name_cont
+  = f.text_field :first_name_or_last_name_cont
+  = f.submit
+
 %h1
   Authors
   = link_to "Add Author", new_admin_author_path, class: 'btn btn-primary'
