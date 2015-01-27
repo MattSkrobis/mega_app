@@ -23,14 +23,12 @@
       = link_to 'Books', books_path, class: 'btn btn-primary'
       = link_to 'Sign in', new_user_session_path, class: 'btn btn-large btn-success'
       = link_to 'Sign up', new_user_registration_path, class: 'btn btn-large btn-success'
-    %h1 Master menu
-    %p The menu of all menus
 
     - if flash[:notice]
       %br
       .success= flash[:notice]
-    - elsif flash[:error]
+    - elsif flash[:alert]
       %br
-      .error= flash[:error]
+      .error= flash[:alert]
 
     = yield

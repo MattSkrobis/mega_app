@@ -1,10 +1,6 @@
-%h1 Book
+%h1 #{@book}
 
 = image_tag @book.avatar.url(:medium)
-
-%b Title
-=@book.title
-%br
 
 %b Author
 =@book.author
@@ -26,20 +22,18 @@
 =@book.edition
 %br
 
-%h2 Leave a comment
-- if user_signed_in?
+- if current_user && !@book.user_has_comment?(current_user)
+  %h2 Leave a comment
   =semantic_form_for([@book, @comment]) do |f|
     =f.input :description
     =f.input :rating
-    =f.input :user_id, as: :select, collection: User.all
     =f.actions do
       =f.action :submit
       =f.action :cancel
-- else
+- unless current_user
   %p Sign in to add comments
 
-
-%h2 Comments about #{@book.title}
+%h2 Comments
 %table.table.table-hover
   %thead
     %tr

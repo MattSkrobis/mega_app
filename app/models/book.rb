@@ -17,4 +17,8 @@ class Book < ActiveRecord::Base
   def to_s
     "#{title}"
   end
+
+  def user_has_comment?(current_user)
+    Comment.where(user: current_user, book: self).count > 0
+  end
 end

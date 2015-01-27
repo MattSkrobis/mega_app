@@ -1,8 +1,6 @@
 =semantic_form_for([:editor, @book, @comment]) do |f|
   =f.input :description
   =f.input :rating
-  =f.input :user_id, as: :select, collection: User.all
-  =f.input :book_id, as: :select, collection: Book.all
   =f.actions do
     =f.action :submit
     =f.action :cancel
