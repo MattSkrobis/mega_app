@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 describe CommentsController do
-  include_context 'user signed in'
   render_views
 
-  let(:user) { create(:user) }
   let!(:book) { create(:book) }
-
-  # NO INDEX
 
   describe '#new' do
     include_context 'user signed in'
@@ -37,12 +33,41 @@ describe CommentsController do
   end
 
   describe '#delete' do
-    include_context 'user signed in'
-
     let!(:comment) { create(:comment, book: book, user: user) }
-    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id, user_id: user.id }
+    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id }
 
-      it { expect { call_request }.to change { Comment.count }.by(-1) }
+    context 'user logged in' do
+      context 'owner signed in' do
+        include_context 'user signed in'
+
+        it { expect { call_request }.to change { Comment.count }.by(-1) }
+
+        context 'after request' do
+          before { call_request }
+
+          it { should redirect_to book_path(book) }
+        end
+      end
+
+      context 'not owner signed in' do
+        let(:not_owner) { create(:user) }
+        let(:user) { create(:user) }
+        before { sign_in not_owner }
+
+        it { expect { call_request }.not_to change { Comment.count } }
+
+        context 'after request' do
+          before { call_request }
+
+          it { should redirect_to book_path(book) }
+        end
+      end
+    end
+
+    context 'user not logged in' do
+      let(:user) { create(:user) }
+
+      it { expect { call_request }.not_to change { Comment.count } }
 
       context 'after request' do
         before { call_request }
@@ -50,6 +75,7 @@ describe CommentsController do
         it { should redirect_to book_path(book) }
       end
     end
+  end
 
   describe '#create' do
     include_context 'user signed in'
@@ -85,7 +111,7 @@ describe CommentsController do
   describe '#update' do
     include_context 'user signed in'
 
-    let!(:comment) { create(:comment, rating: 9, book: book) }
+    let!(:comment) { create(:comment, rating: 9, book: book, user: user) }
     let(:call_request) { put :update, comment: attributes, id: comment.id, book_id: book.id }
 
     context 'valid request' do

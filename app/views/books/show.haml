@@ -48,14 +48,12 @@
       %th User
       %th Actions
   %tbody
-    - @book.comments.where('id IS NOT NULL').each do |comment|
+    - @book.comments.persisted.each do |comment|
       %tr
         %td= comment.description
         %td= comment.rating
         %td= comment.user
         %td
-          - if current_user && current_user == comment.user
+          - if current_user && comment.can_be_updated_or_deleted?(current_user)
             = link_to "Edit", edit_book_comment_path(@book, comment), class: 'btn'
             = link_to 'Destroy', book_comment_path(@book, comment), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
-          - else
-

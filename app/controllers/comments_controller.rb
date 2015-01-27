@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
+  before_action :user_signed_in?
   before_action :get_book
   before_action :get_comment, only: [:edit, :update, :destroy]
-  before_action :user_signed_in?
   before_action :correct_owner?, only: [:edit, :update, :destroy]
-
 
   def new
     @comment = Comment.new
@@ -30,10 +29,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if current_user && current_user == @comment.user
-      @comment.destroy
-      redirect_to book_path(@book)
-    end
+    @comment.destroy
+    redirect_to book_path(@book)
   end
 
   private
@@ -51,6 +48,8 @@ class CommentsController < ApplicationController
   end
 
   def correct_owner?
-    @comment.user == current_user
+    unless @comment.can_be_updated_or_deleted?(current_user)
+      redirect_to book_path(@book), alert: 'You are not owner of this comment'
+    end
   end
 end

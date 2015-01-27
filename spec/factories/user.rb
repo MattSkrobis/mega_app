@@ -8,7 +8,9 @@ FactoryGirl.define do
     sequence(:email) { |n| "email#{n}@me.com" }
     sequence(:password) { 'secret' }
     sequence(:password_confirmation) { 'secret' }
+    sequence(:confirmed_at) { Time.now }
   end
+
   factory :editor, parent: :user do
     role 'editor'
   end
