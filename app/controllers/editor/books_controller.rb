@@ -2,7 +2,7 @@ class Editor::BooksController < Editor::EditorController
   before_action :get_book, except: [:new, :index, :create]
 
   def index
-    @books = Book.all.order(:title).page params[:page]
+    @books = Book.by_title.page(params[:page]).per(5)
   end
 
   def new

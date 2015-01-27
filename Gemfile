@@ -61,3 +61,5 @@ group :test do
   gem 'email_spec'
   gem 'simplecov', require: false
 end
+
+gem 'faker', group: [:development, :test]

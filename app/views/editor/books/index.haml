@@ -25,3 +25,5 @@
           = link_to 'Show', editor_book_path(book), class: 'btn'
           = link_to 'Edit', edit_editor_book_path(book), class: 'btn'
           = link_to 'Destroy', editor_book_path(book), method: :delete, data: {confirm: 'Do you really want to hurt me?'}, class: 'btn btn-danger'
+
+= paginate @books

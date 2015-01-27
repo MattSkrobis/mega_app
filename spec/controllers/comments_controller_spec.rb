@@ -10,6 +10,8 @@ describe CommentsController do
   # NO INDEX
 
   describe '#new' do
+    include_context 'user signed in'
+
     let(:call_request) { get :new, book_id: book.id }
 
     context 'after request' do
@@ -21,6 +23,8 @@ describe CommentsController do
   end
 
   describe '#edit' do
+    include_context 'user signed in'
+
     let(:call_request) { get :edit, book_id: book.id, id: comment.id }
     let(:comment) { create(:comment, book: book, user: user) }
 
@@ -33,19 +37,23 @@ describe CommentsController do
   end
 
   describe '#delete' do
+    include_context 'user signed in'
+
     let!(:comment) { create(:comment, book: book, user: user) }
-    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id, user_id:user.id }
+    let(:call_request) { delete :destroy, id: comment.id, book_id: book.id, user_id: user.id }
 
-    it { expect { call_request }.to change { Comment.count }.by(-1) }
+      it { expect { call_request }.to change { Comment.count }.by(-1) }
 
-    context 'after request' do
-      before { call_request }
+      context 'after request' do
+        before { call_request }
 
-      it { should redirect_to book_path(book) }
+        it { should redirect_to book_path(book) }
+      end
     end
-  end
 
   describe '#create' do
+    include_context 'user signed in'
+
     let(:call_request) { post :create, comment: attributes, book_id: book.id }
 
     context 'valid request' do
@@ -75,6 +83,8 @@ describe CommentsController do
   end
 
   describe '#update' do
+    include_context 'user signed in'
+
     let!(:comment) { create(:comment, rating: 9, book: book) }
     let(:call_request) { put :update, comment: attributes, id: comment.id, book_id: book.id }
 
