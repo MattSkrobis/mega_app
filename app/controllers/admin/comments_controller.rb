@@ -15,7 +15,8 @@ class Admin::CommentsController < Admin::AdminController
   end
 
   def index
-    @comments = Comment.all
+    @q = Comment.search(params[:q])
+    @comments = @q.result.page(params[:page]).per(10)
   end
 
   def destroy

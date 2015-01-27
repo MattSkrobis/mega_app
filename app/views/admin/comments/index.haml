@@ -1,3 +1,8 @@
+= search_form_for([:admin, @q]) do |f|
+  = f.label :user_first_name_or_user_last_name_cont
+  = f.search_field :user_first_name_or_user_last_name_cont
+  = f.submit
+
 %h1
   Comments
   = link_to "Add Comment", new_admin_comment_path, class: 'btn btn-primary'
