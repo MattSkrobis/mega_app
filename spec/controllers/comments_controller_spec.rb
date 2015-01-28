@@ -109,33 +109,65 @@ describe CommentsController do
   end
 
   describe '#update' do
-    include_context 'user signed in'
-
     let!(:comment) { create(:comment, rating: 9, book: book, user: user) }
     let(:call_request) { put :update, comment: attributes, id: comment.id, book_id: book.id }
 
-    context 'valid request' do
-      let(:attributes) { attributes_for(:comment, rating: 2) }
+    context 'user logged in' do
+      include_context 'user signed in'
 
-      it { expect { call_request }.to change { comment.reload.rating }.from(9).to(2) }
+      context 'valid request' do
+        let(:attributes) { attributes_for(:comment, rating: 2) }
 
-      context 'after request' do
-        before { call_request }
+        it { expect { call_request }.to change { comment.reload.rating }.from(9).to(2) }
 
-        it { should redirect_to book_path(book) }
-        it { expect(assigns(:comment)).to eq comment }
+        context 'after request' do
+          before { call_request }
+
+          it { should redirect_to book_path(book) }
+          it { expect(assigns(:comment)).to eq comment }
+        end
+      end
+
+      context 'invalid request' do
+        let(:attributes) { attributes_for(:comment, rating: nil, book: book) }
+
+        it { expect { call_request }.not_to change { comment.reload.rating } }
+
+        context 'after request' do
+          before { call_request }
+
+          it { should render_template 'edit' }
+          it { expect(assigns(:comment)).to eq comment }
+        end
+      end
+
+      context 'not owner signed in' do
+        let(:attributes) { attributes_for(:comment, rating: 2) }
+        let(:not_owner) { create(:user) }
+        let(:user) { create(:user) }
+        before { sign_in not_owner }
+
+        it { expect { call_request }.not_to change { comment.reload.rating } }
+
+        context 'after request' do
+          before { call_request }
+
+          it { should redirect_to book_path(book) }
+          it { expect(assigns(:comment)).to eq comment }
+        end
       end
     end
 
-    context 'invalid request' do
-      let(:attributes) { attributes_for(:comment, rating: nil, book: book) }
+    context 'user not logged in' do
+      let(:user) {create(:user)}
+      let(:attributes) { attributes_for(:comment, rating: 2) }
 
       it { expect { call_request }.not_to change { comment.reload.rating } }
 
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { should redirect_to book_path(book) }
         it { expect(assigns(:comment)).to eq comment }
       end
     end
