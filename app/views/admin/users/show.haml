@@ -1,12 +1,8 @@
-%h1 User
+%h1 #{@user.nickname}
 
 = image_tag @user.avatar.url(:thumb)
 
 %br
-%br
-
-%b Nickname
-=@user.nickname
 %br
 
 %b E-mail
